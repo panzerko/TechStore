@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TechStore.DAL.Models.Customer>
+@{
+    ViewBag.Title = "Customers list";
+}
+<div class="row">
+    <div class="col">
+        <a class="btn btn-sm btn-primary" asp-action="Create">Add new customer</a>
+        <a class="btn btn-sm btn-primary" asp-action="Find">Find customer</a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col">
+
+        <table class="table table-responsive-md table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th>First Name</th>
+                    <th>Second Name</th>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Orders</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var customer in Model)
+                {
+                    <tr>
+                        <td>@customer.FirstName</td>
+                        <td>@customer.SecondName</td>
+                        <td>@customer.Phone</td>
+                        <td>@customer.Email</td>
+                        <td><a asp-action="ShowOrders" asp-route-id="@customer.Id">Orders</a></td>
+                        <td>
+                            <form asp-action="Edit" asp-route-id="@customer.Id" method="get">
+                                <button type="submit" class="btn btn-sm btn-primary">
+                                    Edit
+                                </button>
+                            </form>
+                        </td>
+                        <td>
+                            <form asp-action="Delete" asp-route-id="@customer.Id" method="post">
+                                <button type="submit" class="btn btn-sm btn-danger">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
