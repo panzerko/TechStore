@@ -1,0 +1,46 @@
+﻿@model IEnumerable<TechStore.DAL.Models.Order>
+@{
+    ViewBag.Title = "Find result";
+}
+
+<div class="input-group row mt-2">
+    <div class=" col">
+        <h2 class="">Founded @Model.Count() records : </h2>
+    </div>
+    <div class="col ml-auto">
+        <form asp-controller="Order" asp-action="Index" method="get">
+            <button type="submit" class="btn btn-sm btn-primary">Back to Goods</button>
+        </form>
+    </div>
+</div>
+
+<table class="table table-responsive-md table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Date of order</th>
+            <th>Goods</th>
+            <th>Customer</th>
+            <th>City</th>
+            <th>Street</th>
+            <th>Status</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var order in Model)
+    {
+        <tr>
+            <td>@order.Id</td>
+            <td>@order.OrderDate</td>
+            <td><a asp-action="ShowCustomer" asp-route-id="@order.Id">Customer</a></td>
+            <td><a asp-action="ShowGoods" asp-route-id="@order.Id">Goods</a></td>
+            <td>@order.EndPointCity</td>
+            <td>@order.EndPointStreet</td>
+            <td>@order.OrderStatus</td>
+            <td>@order.CommonPrice</td>
+        </tr>
+    }
+    </tbody>
+
+</table>
