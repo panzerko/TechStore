@@ -1,0 +1,107 @@
+﻿@model TechStore.ViewModels.CreateGoodView
+@{
+    ViewBag.Title = "New Good";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+
+@if (ViewBag.Error != null)
+{
+    <script type="text/JavaScript">
+        alert(@ViewBag.Error);
+    </script>
+}
+
+<form asp-action="Create" asp-controller="Good">
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="row py-2 justify-content-center">
+        <div class="form-group col-lg-7">
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="Name" class="control-label">Name</label>
+                    <input type="text" asp-for="Name" class="form-control" placeholder="Name" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="Specification" class="control-label">Specification</label>
+                    <input type="text" asp-for="Specification" class="form-control" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="PhotoUrl" class="control-label">Photo Url</label>
+                    <input type="text" asp-for="PhotoUrl" class="form-control" placeholder="PhotoUrl" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="YearOfManufacture" class="control-label">Year of manufacture</label>
+                    <input type="number" asp-for="YearOfManufacture" class="form-control" placeholder="Year of manufacture" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="WarrantyTerm" class="control-label">WarrantyTerm</label>
+                    <input type="number" asp-for="WarrantyTerm" class="form-control" placeholder="Warranty Term" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="Producers">Producer</label>
+                    <select class="form-control" name="producerSelect">
+                        @foreach (var producer in Model.Producers)
+                        {
+                            <option>@producer.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="Price" class="control-label">Price</label>
+                    <input type="number" asp-for="Price" class="form-control" placeholder="Place" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="Type" class="control-label">Type</label>
+                    <input type="text" asp-for="Type" class="form-control" placeholder="Type" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <label asp-for="Count" class="control-label">Amount</label>
+                    <input type="number" asp-for="Count" class="form-control" placeholder="Count" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <ul>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Storages<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                @foreach (TechStore.DAL.Models.Storage storage in Model.Storages)
+                                {
+                                    <li>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="storages" value="@storage.Street">
+                                                @string.Join(", ", @storage.City, @storage.Street)
+                                            </label>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col">
+                    <button type="submit" value="Add" class="btn btn-success">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
