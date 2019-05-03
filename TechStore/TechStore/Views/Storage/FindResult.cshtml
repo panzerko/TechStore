@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TechStore.DAL.Models.Storage>
+@{
+    ViewBag.Title = "Find result";
+}
+
+<div class="input-group row mt-2">
+    <div class=" col">
+        <h2 class="">Founded @Model.Count() records : </h2>
+    </div>
+    <div class="col ml-auto">
+        <form asp-controller="Storage" asp-action="Index" method="get">
+            <button type="submit" class="btn btn-sm btn-primary">Back to Goods</button>
+        </form>
+    </div>
+</div>
+
+
+
+
+<table class="table table-responsive-md table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>City</th>
+            <th>Street</th>
+            <th>Goods</th>
+            <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var storage in Model)
+        {
+            <tr>
+                <td>@storage.City</td>
+                <td>@storage.Street</td>
+                <td><a asp-action="ShowGoods" asp-route-id="@storage.Id">Show Goods</a></td>
+                <td>
+                    <form asp-action="Edit" asp-route-id="@storage.Id" method="get">
+                        <button type="submit" class="btn btn-sm btn-primary">
+                            Edit
+                        </button>
+                    </form>
+                </td>
+                <td>
+                    <form asp-action="Delete" asp-route-id="@storage.Id" method="post">
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            Delete
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
