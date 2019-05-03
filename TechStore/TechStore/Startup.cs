@@ -72,6 +72,8 @@ namespace TechStore
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseAuthentication();
+            app.UseSession();
             app.UseCookiePolicy();
 
             app.UseMvc(routes =>
