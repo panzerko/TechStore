@@ -101,7 +101,7 @@
                                     }
                                 </select>
                                 <div class="input-group-append">
-                                    <button class="btn btn-warning" type="submit" style="color: white;">Sort</button>
+                                    <button class="btn btn-warning" type="submit">Sort</button>
                                 </div>
                             </div>
                         </div>
@@ -110,20 +110,20 @@
                 </div>
             </div>
             <div class="row">
-                <div class="row offset-2">
+                <div class="row">
                     @foreach (var good in Model.FilterModel.Goods)
                     {
                         <div class="col-md-4">
-                            @* <a asp-area="" asp-controller="GoodPage" asp-action="ShowGood" asp-route-goodId="@good.Id" class="good-link">*@
-                            <a href="#">
-                                <div class="card">
+                             <a asp-area="" asp-controller="GoodPage" asp-action="ShowGood" asp-route-goodId="@good.Id" class="product-link">
+                            
+                                <div class="card product-card p-1">
                                     <img class="card-img-top" src="../images/goods/@good.PhotoUrl" alt="">
                                     <div class="card-header">
                                         <p class="product-title">
                                             @good.Name
                                         </p>
                                         <p class="product-desc">@good.Specification</p>
-                                        <p class="product-price">Price: @good.Price</p>
+                                        <p class="product-price text-center">Price: @good.Price</p>
                                     </div>
                                 </div>
                             </a>
