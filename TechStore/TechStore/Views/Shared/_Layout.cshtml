@@ -47,6 +47,14 @@
                         }
                         else
                         {
+                            @if (User.IsInRole("customer"))
+                             {
+                                 <li class="nav-item">
+                                     <a class="nav-link" asp-area="" asp-controller="Cart" asp-action="ShowCart">
+                                         <div class="cart-img"><img  src="~/images/menu-cart.svg" /></div>
+                                     </a>
+                                 </li>
+                             }
                             <li class="nav-item text-lowercase"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="CustomerSettingPage">@User.Identity.Name</a></li>
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Account" asp-action="LogOut">Log Out</a></li>
                         }

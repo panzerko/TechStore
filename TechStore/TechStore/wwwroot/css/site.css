@@ -137,3 +137,18 @@ body {
     border: 10px;
     box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
 }
+
+
+.cart-img img {
+    height: 1.5rem;
+    width: 1.5rem;
+    opacity: 0.5;
+}
+
+    .cart-img img:hover {
+        opacity: 1;
+    }
+
+.cart-good-img {
+    width: 15rem;
+}
