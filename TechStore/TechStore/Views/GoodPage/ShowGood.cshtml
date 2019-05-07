@@ -41,15 +41,14 @@
                     <b>Producer: </b>@Model.Producer.Name
                 </p>
             }
-            <hr class="black-hr" />
             <form asp-action="AddToCart" asp-controller="Cart" asp-route-id="@Model.Id">
-                    <div class="price">
-                        <p>
-                            @Model.Price
-                        </p>
-                        <button class="btn btn-success">Add to cart</button>
-                    </div>
-                </form>
+                <div class="price">
+                    <p>
+                        <b>Price: </b> @Model.Price
+                    </p>
+                    <button class="btn btn-success">Add to cart</button>
+                </div>
+            </form>
         </div>
     </div>
     <hr class="black-hr" />
@@ -94,10 +93,10 @@
             <hr class="black-hr" />
             <div class="row text-center mb-3">
                 <div class="col">
-                    <a onclick="ShowReviews()" style="cursor: pointer;">Show reviews</a>
+                    <button class="btn btn-outline-dark" data-toggle="collapse" data-target="#reviews" aria-expanded="true">Show reviews</button>
                 </div>
             </div>
-            <div id="reviews">
+            <div class="collapse" id="reviews">
                 <hr class="black-hr" />
                 @if (Model.Reviews.Count != 0)
                 {
@@ -106,39 +105,63 @@
                         if (review.IsVisibleForAll || review.Customer.Email == User.Identity.Name)
                         {
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <p>Name : @string.Join(" ", review.Customer.FirstName, review.Customer.SecondName)</p>
-                                    <p>Date : @review.Date</p>
-                                </div>
-                                <div class="col-lg-8">
+                                <div class="col-lg-12">
                                     <form asp-action="EditReview" asp-controller="GoodPage" asp-route-goodId="@Model.Id">
                                         <input name="reviewId" value="@review.Id" style="display: none;" />
-                                        <div class="row">
-                                            <div class="col-lg-4">
-                                                <p id=@string.Join("", "reviewMessage", @review.Id.ToString())>@review.Message</p>
-                                                <textarea type="text" name="newMessage" id=@string.Join("", "hiddenInput", @review.Id.ToString()) style="display: none;">@review.Message</textarea>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                @if (review.StarCount != 0)
-                                                {
-                                                    <p id="@string.Join("", "starCount", @review.Id.ToString())">Mark : @review.StarCount / 5</p>
-                                                    <input name="newStarCount" id=@string.Join("", "hiddenStarCount", @review.Id.ToString()) value="@review.StarCount" style="display: none;" />
-                                                }
-                                                else
-                                                {
-                                                    <p>Mark : None</p>
-                                                }
-                                            </div>
-                                            @if (User.Identity.Name == review.Customer.Email || User.IsInRole("admin"))
-                                            {
-                                                <div class="col-lg-4">
-                                                    <a class="btn btn-primary" style="color: white;" id=@string.Join("", "editButton", @review.Id.ToString()) onclick="Edit(@review.Id)">Edit</a>
-                                                    <input class="btn btn-warning" type="submit" style="display: none; color: white;" id=@string.Join("", "saveButton", @review.Id.ToString())
-                                                           value="Save">
-                                                    <a class="btn btn-danger" asp-action="DeleteReview"
-                                                       asp-controller="GoodPage" asp-route-id="@review.Id">Delete</a>
+                                        <div class="card">
+                                            <div class="row card-body">
+                                                <div class="col-3">
+                                                    <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class=" img-fluid" />
+                                                    <p class="text-secondary text-center m-0"> @review.Date.ToShortDateString()</p>
+                                                    <p class="text-secondary text-center m-0"> @review.Date.ToShortTimeString()</p>
                                                 </div>
-                                            }
+                                                <div class="col-9">
+                                                    <b> @string.Join(" ", review.Customer.FirstName, review.Customer.SecondName)</b>
+                                                    @if (review.StarCount != 0)
+                                                    {
+
+                                                        <div class="row justify-content-center">
+                                                            <div class="col">
+                                                                <ul class="rate d-inline">
+                                                                    @for (int i = 0; i < @review.StarCount; i++)
+                                                                    {
+                                                                        <li class="review-star review-star-in-color"></li>
+                                                                    }
+                                                                    @if (@review.StarCount != 5)
+                                                                    {
+                                                                        for (int i = @review.StarCount; i < 5; i++)
+                                                                        {
+                                                                            <li class="review-star"></li>
+                                                                        }
+                                                                    }
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p>Mark : None</p>
+                                                    }
+
+
+                                                    <div class="row">
+                                                        <div class="col">
+                                                            <p class="card-text" id=@string.Join("", "reviewMessage", @review.Id.ToString())>@review.Message</p>
+                                                            <textarea type="text" name="newMessage" id=@string.Join("", "hiddenInput", @review.Id.ToString()) style="display: none;">@review.Message</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @if (User.Identity.Name == review.Customer.Email || User.IsInRole("admin"))
+                                                {
+                                                    <div class="col-lg-4">
+                                                        <a class="btn btn-primary " style="color: white;" id=@string.Join("", "editButton", @review.Id.ToString()) onclick="Edit(@review.Id)">Edit</a>
+                                                        <input class="btn btn-warning" type="submit" style="display: none; color: white;" id=@string.Join("", "saveButton", @review.Id.ToString())
+                                                               value="Save">
+                                                        <a class="btn btn-danger " asp-action="DeleteReview"
+                                                           asp-controller="GoodPage" asp-route-id="@review.Id">Delete</a>
+                                                    </div>
+                                                }
+                                            </div>
                                         </div>
                                     </form>
                                 </div>

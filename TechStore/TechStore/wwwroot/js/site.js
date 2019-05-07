@@ -88,7 +88,8 @@ function Star(i) {
 
     mark = i;
     document.getElementById("mark").value = mark;
-}
+};
+
 
 var isEditing = false;
 
