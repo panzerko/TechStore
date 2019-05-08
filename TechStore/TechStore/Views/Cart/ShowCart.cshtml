@@ -31,7 +31,7 @@ else
                     <div class="row card-body cart-item text-center">
                         <div class="col-lg-4 col-12 my-auto">
                             <a asp-area="" asp-controller="GoodPage" asp-action="ShowGood" asp-route-goodId="@part.Good.Id">
-                                <div class="cart-good-img mx-auto align-items-center"><img class="d-block mx-auto my-auto w-100" src="../images/goods/@part.Good.PhotoUrl" /></div>
+                                <div class="cart-good-img mx-auto align-items-center"><img class="d-block mx-auto my-auto block-product-img" src="../images/goods/@part.Good.PhotoUrl" /></div>
                             </a>
                         </div>
                         <div class="col-lg-4 col-12 my-auto">
@@ -64,7 +64,7 @@ else
             </div>
         </div>
         <div>
-            <input type="submit" class="btn btn btn-success center-button" value="Confirm">
+            <button type="submit" class="btn btn btn-dark" value="Confirm">Confirm</button>
         </div>
     </form>
 }

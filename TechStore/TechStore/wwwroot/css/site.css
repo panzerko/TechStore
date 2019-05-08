@@ -76,7 +76,10 @@ body {
 }
 
 /*To solve overlap bug at the edges during magnification*/
-.small { display: block; }
+.small {
+     display: block; 
+    max-height: 30rem;
+}
 
 
 .rate {
@@ -151,6 +154,7 @@ body {
 
 .cart-good-img {
     width: 15rem;
+    height: 8rem;
 }
 
 .rate .review-star:before {
@@ -169,4 +173,18 @@ body {
 
 .rate .review-star-in-color {
     color: #ffdb11 !important;
+}
+
+.transparent-input {
+    background: none;
+    border: none;
+}
+
+.block-product-img {
+    max-height: 100%;
+    max-width: 100%;
+}
+
+.product-card-img {
+    height: 15rem;
 }

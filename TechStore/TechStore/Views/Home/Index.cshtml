@@ -117,7 +117,7 @@
                              <a asp-area="" asp-controller="GoodPage" asp-action="ShowGood" asp-route-goodId="@good.Id" class="product-link">
                             
                                 <div class="card product-card p-1">
-                                    <img class="card-img-top" src="../images/goods/@good.PhotoUrl" alt="">
+                                    <div class=" product-card-img mx-auto align-items-center"><img class="block-product-img d-block mx-auto my-auto" src="../images/goods/@good.PhotoUrl" /></div>
                                     <div class="card-header">
                                         <p class="product-title">
                                             @good.Name
