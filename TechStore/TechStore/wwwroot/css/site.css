@@ -113,7 +113,7 @@ body {
 .product-title {
     color: black;
     font-weight: bold;
-    max-height: 25px;
+    height: 50px;
     overflow: hidden;
 }
 
@@ -187,4 +187,29 @@ body {
 
 .product-card-img {
     height: 15rem;
+}
+
+.pagination {
+    position: relative;
+}
+.pagination li a {
+    padding: 0 0.5rem;
+    color: black;
+
+}
+.pagination .active a {
+    color: white;
+
+}
+.pagination li {
+    width: 2rem;
+    height: 2rem;
+    background-color: white;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    text-align: center; 
+}
+
+.pagination .active {
+    background-color: #101010;
 }
