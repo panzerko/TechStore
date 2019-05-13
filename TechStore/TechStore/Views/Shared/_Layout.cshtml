@@ -38,6 +38,10 @@
                         {
                             <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Admin" asp-action="Index">Admin panel</a></li>
                         }
+                        @if (User.IsInRole("manager"))
+                        {
+                            <li class="nav-item"><a class="nav-link" asp-area="" asp-controller="Manager" asp-action="Index">Manage orders</a></li>
+                        }
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         @if (!User.Identity.IsAuthenticated)

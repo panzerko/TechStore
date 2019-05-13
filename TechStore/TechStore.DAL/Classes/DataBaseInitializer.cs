@@ -15,6 +15,9 @@ namespace TechStore.DAL.Classes
             string adminEmail = "administrator123@gmail.com";
             string adminPassword = "Admin123";
 
+            string managerEmail = "manager@manager.com";
+            string managerPassword = "Manager123";
+
             if (await roleManager.FindByNameAsync("admin") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("admin"));
@@ -38,6 +41,17 @@ namespace TechStore.DAL.Classes
                 if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(admin, "admin");
+                }
+            }
+
+            if (await userManager.FindByNameAsync(managerEmail) == null)
+            {
+                ApplicationUser manager = new ApplicationUser { Email = managerEmail, UserName = managerEmail };
+                IdentityResult result = await userManager.CreateAsync(manager, managerPassword);
+
+                if (result.Succeeded)
+                {
+                    await userManager.AddToRoleAsync(manager, "manager");
                 }
             }
 
