@@ -7,7 +7,7 @@ using TechStore.DAL.Models;
 
 namespace TechStore.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, moderator")]
     public class ReviewController : Controller
     {
         private readonly UnitOfWork unitOfWork;
