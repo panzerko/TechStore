@@ -6,37 +6,43 @@
 
 <div class="row justify-content-center">
     <div class="col col-lg-5 my-3">
-        <div class="row">
-            <div class="col text-center">
-                <h2 class="">Login</h2>
-            </div>
-        </div>
-        <form method="post" asp-controller="Account" asp-action="Login">
-            <div asp-validation-summary="ModelOnly"></div>
-            <div class="form-group">
-                <label for="LoginEmail">Email</label>
-                <div><span asp-validation-for="Email"></span></div>
-                <input type="email" class="form-control" id="LoginEmail" asp-for="Email" placeholder="Email">
-                <label for="LoginPassword">Password</label>
-                <div><span asp-validation-for="Password"></span></div>
-                <input asp-for="Password" class="form-control" id="LoginPassword" placeholder="Password">
-                <a asp-action="ForgotPassword" asp-controller="Account">Forgot password?</a>
-            </div>
-            <div>
-                <span asp-validation-for="RememberMe"></span>
-                <input asp-for="RememberMe" type="checkbox">
-                <label>Remember me</label>
-            </div>
-            <div class="form-group">
+        <div class="card">
+            <div class="card-header">
                 <div class="row">
-                    <div class="col">
-                        <button class="btn btn-primary" type="submit">Log in</button>
-                    </div>
-                    <div class="col ml-auto text-right">
-                        <a asp-action="Register" asp-controller="Account">Sign In</a>
+                    <div class="col text-center">
+                        <h2 class="">Login</h2>
                     </div>
                 </div>
             </div>
-        </form>
+            <div class="card-body">
+                <form method="post" asp-controller="Account" asp-action="Login">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <label for="LoginEmail">Email</label>
+                        <div><span asp-validation-for="Email"></span></div>
+                        <input type="email" class="form-control" id="LoginEmail" asp-for="Email" placeholder="Email">
+                        <label for="LoginPassword">Password</label>
+                        <div><span asp-validation-for="Password"></span></div>
+                        <input asp-for="Password" class="form-control" id="LoginPassword" placeholder="Password">
+                        <a asp-action="ForgotPassword" asp-controller="Account">Forgot password?</a>
+                    </div>
+                    <div>
+                        <span asp-validation-for="RememberMe"></span>
+                        <input asp-for="RememberMe" type="checkbox">
+                        <label>Remember me</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn btn-primary" type="submit">Log in</button>
+                            </div>
+                            <div class="col ml-auto text-right">
+                                <a asp-action="Register" asp-controller="Account">Sign Up</a>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

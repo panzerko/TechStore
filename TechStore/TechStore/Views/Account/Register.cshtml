@@ -6,57 +6,67 @@
 
 <div class="row justify-content-center">
     <div class="col col-lg-7 my-3">
-        <div id="login-div">
-            <div class="row">
-                <div class="col text-center">
-                    <h2>Register</h2>
+        <div class="card" id="login-div">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col text-center">
+                        <h2>Register</h2>
+                    </div>
                 </div>
             </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Account" asp-action="Register">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div class="form-group">
+                        <div class="form-group row">
+                            <div class="col">
+                                <span asp-validation-for="FirstName"></span>
+                                <label for="registerFirstName">FirstName</label>
+                                <input asp-for="FirstName" id="registerFirstName" class="form-control" placeholder="First Name">
+                            </div>
+                            <div class="col">
+                                <span asp-validation-for="SecondName"></span>
+                                <label for="registerSecondName">SecondName</label>
+                                <input asp-for="SecondName" id="registerSecondName" class="form-control" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col">
+                                <span asp-validation-for="Phone"></span>
+                                <label for="registerPhone">Phone</label>
+                                <input asp-for="Phone" id="registerPhone" class="form-control" placeholder="Phone" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col">
+                                <span asp-validation-for="Email"></span>
+                                <label for="registerEmail">Email</label>
+                                <input type="email" asp-for="Email" id="registerEmail" class="form-control" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col">
+                                <span asp-validation-for="Password"></span>
+                                <label for="registerPassword">Password</label>
+                                <input asp-for="Password" id="registerPassword" class="form-control" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col">
+                                <span asp-validation-for="PasswordConfirm"></span>
+                                <label for="registerConfirmPassword">PasswordConfirm</label>
+                                <input asp-for="PasswordConfirm" id="registerConfirmPassword" class="form-control" placeholder="Confirm Password">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-primary" value="Register">Register</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
 
-            <form method="post" asp-controller="Account" asp-action="Register">
-                <div asp-validation-summary="ModelOnly"></div>
-                <div class="form-group">
-                    <div class="form-group row">
-                        <div class="col">
-                            <span asp-validation-for="FirstName"></span>
-                            <input asp-for="FirstName" class="form-control" placeholder="First Name">
-                        </div>
-                        <div class="col">
-                            <span asp-validation-for="SecondName"></span>
-                            <input asp-for="SecondName" class="form-control" placeholder="Last Name">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col">
-                            <span asp-validation-for="Phone"></span>
-                            <input asp-for="Phone" class="form-control" placeholder="Phone" />
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col">
-                            <span asp-validation-for="Email"></span>
-                            <input type="email" asp-for="Email" class="form-control" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col">
-                            <span asp-validation-for="Password"></span>
-                            <input asp-for="Password" class="form-control" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <div class="col">
-                            <span asp-validation-for="PasswordConfirm"></span>
-                            <input asp-for="PasswordConfirm" class="form-control" placeholder="Confirm Password">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit" class="btn btn-primary" value="Register">Register</button>
-                        </div>
-                    </div>
-                </div>
-            </form>
         </div>
     </div>
 </div>
