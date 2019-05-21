@@ -30,7 +30,8 @@
                 <td>@good.YearOfManufacture</td>
                 <td>@good.WarrantyTerm months</td>
                 <td>@good.Price</td>
-                <td>@good.Type</td>
+                @*<td>@good.Type</td>*@
+                <td>@good.Category.Name</td>
                 <td>@good.Count</td>
                 <td>
                     <form asp-action="Edit" asp-route-id="@good.Id" method="get">

@@ -37,6 +37,10 @@ namespace TechStore.ViewModels
         public List<Producer> Producers { get; set; }
 
         [Required]
+        [Display(Name = "Category")]
+        public List<Category> Categories { get; set; }
+
+        [Required]
         [Display(Name = "Price")]
         public decimal Price { get; set; }
 

@@ -88,8 +88,8 @@ namespace TechStore.Controllers
         public IActionResult TypeSearch(string goodType)
         {
             var model = new FindRangeInMainView(unitOfWork);
-            var goods = unitOfWork.Goods.GetAll().ToList().Where(p => p.Type == goodType);
-
+            //var goods = unitOfWork.Goods.GetAll().ToList().Where(p => p.Type == goodType);
+            var goods = unitOfWork.Goods.GetAll().ToList();
             if (goodType == "All")
             {
                 goods = unitOfWork.Goods.GetAll().ToList();
@@ -180,8 +180,8 @@ namespace TechStore.Controllers
             {
                 addToResult = false;
             }
-
-            if (model.FilterModel.GoodView.Type != null && good.Type != model.FilterModel.GoodView.Type)
+           // if (model.FilterModel.GoodView.Type != null && good.Type != model.FilterModel.GoodView.Type)
+                if (model.FilterModel.GoodView.Type != null)
             {
                 if (model.FilterModel.GoodView.Type != "All")
                 {

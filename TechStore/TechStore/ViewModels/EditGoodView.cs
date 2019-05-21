@@ -28,6 +28,10 @@ namespace TechStore.ViewModels
 
         public List<Producer> Producers { get; set; }
 
+        public Category Category { get; set; }
+
+        public List<Category> Categories { get; set; }
+
         public decimal Price { get; set; }
 
         public string Type { get; set; }

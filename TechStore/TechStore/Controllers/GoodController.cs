@@ -58,7 +58,7 @@ namespace TechStore.Controllers
                     WarrantyTerm = model.WarrantyTerm,
                     Producer = unitOfWork.Producers.GetAll().Where(p => p.Name == Request.Form["producerSelect"]).First(),
                     Price = model.Price,
-                    Type = model.Type,
+                    Category = unitOfWork.Categories.GetAll().Where(p => p.Name == Request.Form["categorySelect"]).First(),
                     Count = model.Count,
                 };
 
@@ -112,7 +112,8 @@ namespace TechStore.Controllers
                 YearOfManufacture = good.YearOfManufacture,
                 WarrantyTerm = good.WarrantyTerm,
                 Price = Convert.ToInt32(good.Price),
-                Type = good.Type,
+                Category = await unitOfWork.Categories.Get(good.CategoryId),
+                Categories = unitOfWork.Categories.GetAll().ToList(),
                 Count = good.Count,
                 Producer = await unitOfWork.Producers.Get(good.ProducerId),
                 Producers = unitOfWork.Producers.GetAll().ToList(),
@@ -138,10 +139,11 @@ namespace TechStore.Controllers
                     good.YearOfManufacture = model.YearOfManufacture;
                     good.WarrantyTerm = model.WarrantyTerm;
                     good.Price = model.Price;
-                    good.Type = model.Type;
                     good.Count = model.Count;
                     good.Producer = unitOfWork.Producers.GetAll()
                         .Where(p => p.Name == Request.Form["producerSelect"]).First();
+                    good.Category = unitOfWork.Categories.GetAll()
+                        .Where(p => p.Name == Request.Form["categorySelect"]).First();
 
                     List<Storage> goodStorages = new List<Storage>();
 
@@ -274,10 +276,10 @@ namespace TechStore.Controllers
                 addToResult = false;
             }
 
-            if (model.Type != null && good.Type != model.Type)
-            {
-                addToResult = false;
-            }
+            //if (model.Type != null && good.Type != model.Type)
+            //{
+            //    addToResult = false;
+            //}
 
             return addToResult;
         }

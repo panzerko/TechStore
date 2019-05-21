@@ -33,6 +33,8 @@ namespace TechStore.DAL.Models
 
         public DbSet<GoodCart> GoodCart { get; set; }
 
+        public DbSet<Category> Categories { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -47,6 +49,9 @@ namespace TechStore.DAL.Models
                 .HasKey(s => s.Id);
 
             modelBuilder.Entity<Cart>().
+                HasKey(c => c.Id);
+
+            modelBuilder.Entity<Category>().
                 HasKey(c => c.Id);
 
             modelBuilder.Entity<GoodOrder>()

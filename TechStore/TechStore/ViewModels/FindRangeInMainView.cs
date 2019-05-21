@@ -25,9 +25,10 @@ namespace TechStore.ViewModels
 
         public FindRangeInMainView(UnitOfWork unitOfWork) : this()
         {
-            var allTypes = unitOfWork.Goods.GetAll()
-                .Select(p => p.Type)
-                .Distinct();
+            //var allTypes = unitOfWork.Goods.GetAll()
+            //    .Select(p => p.Type)
+            //    .Distinct();
+            var allTypes = unitOfWork.Goods.GetAll().Select(p=>p.Category.Name).ToList();
             this.Types.AddRange(allTypes);
         }
 

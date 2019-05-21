@@ -15,6 +15,7 @@ namespace TechStore.DAL.Classes.UnitOfWork
         private OrderRepository _orderRepository;
         private ProducerRepository _producerRepository;
         private ReviewRepository _reviewRepository;
+        private CategoryRepository _categoryRepository;
 
         private bool _disposed = false;
 
@@ -40,6 +41,9 @@ namespace TechStore.DAL.Classes.UnitOfWork
 
         public ReviewRepository Reviews => _reviewRepository ?? 
                                            (_reviewRepository = new ReviewRepository(_applicationContext));
+
+        public CategoryRepository Categories => _categoryRepository ??
+                                                (_categoryRepository = new CategoryRepository(_applicationContext));
 
         public async Task SaveAsync()
         {

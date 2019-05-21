@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<TechStore.DAL.Models.Good>
 @{
-    ViewBag.Title = "Goods list";
+    ViewBag.Title = "Product list";
 }
 
 <div class="input-group row mt-2">
     <div class=" col">
-        <h2 class="">Goods on @ViewBag.NameOfStorage storage : </h2>
+        <h2 class="">Goods on @ViewBag.CategoryName storage : </h2>
     </div>
     <div class="col">
         <span class="input-group-btn">
-            <a class="btn btn-sm btn-primary" asp-controller="Storage" asp-action="Index" style="float: right;">Back</a>
+            <a class="btn btn-sm btn-primary" asp-controller="Category" asp-action="Index" style="float: right;">Back</a>
         </span>
     </div>
 </div>
