@@ -38,7 +38,7 @@ namespace TechStore.DAL.Classes.UnitOfWork.Classes
             good.Reviews = _appContext.Reviews.Where(r => r.GoodId == id).ToList();
             good.Producer = await _appContext.Producers
                 .Where(p => p.Id == good.ProducerId).FirstOrDefaultAsync();
-            
+            good.Category = await _appContext.Categories.Where(p => p.Id == good.CategoryId).FirstOrDefaultAsync();
             foreach (var review in good.Reviews)
             {
                 review.Customer = await _appContext.Customers
@@ -50,13 +50,10 @@ namespace TechStore.DAL.Classes.UnitOfWork.Classes
 
         public IEnumerable<Good> GetAll()
         {
-            IEnumerable<Good> goods = _appContext.Goods;
-
-            foreach (var good in goods)
-            {
-                good.Producer = _appContext.Producers.Where(p => p.Id == good.ProducerId).First();
-                good.Reviews = GetReviews(good.Id);
-            }
+            IEnumerable<Good> goods = _appContext.Goods
+                .Include(p => p.Category)
+                .Include(p => p.Reviews)
+                .Include(p => p.Producer);
 
             return goods;
         }

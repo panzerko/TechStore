@@ -38,7 +38,8 @@ namespace TechStore.Controllers
             CreateGoodView model = new CreateGoodView
             {
                 Producers = unitOfWork.Producers.GetAll().ToList(),
-                Storages = unitOfWork.Storages.GetAll().ToList()
+                Storages = unitOfWork.Storages.GetAll().ToList(),
+                Categories = unitOfWork.Categories.GetAll().ToList()
             };
 
             return View(model);
@@ -49,29 +50,33 @@ namespace TechStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                Good good = new Good
+                if (unitOfWork.Categories != null)
                 {
-                    Name = model.Name,
-                    Specification = model.Specification,
-                    PhotoUrl = model.PhotoUrl,
-                    YearOfManufacture = model.YearOfManufacture,
-                    WarrantyTerm = model.WarrantyTerm,
-                    Producer = unitOfWork.Producers.GetAll().Where(p => p.Name == Request.Form["producerSelect"]).First(),
-                    Price = model.Price,
-                    Category = unitOfWork.Categories.GetAll().Where(p => p.Name == Request.Form["categorySelect"]).First(),
-                    Count = model.Count,
-                };
-
-                if (storages.Count > 0)
-                {
-                    foreach (var storage in storages)
+                    Good good = new Good
                     {
-                        Storage tempStorage = unitOfWork.Storages.GetAll().Where(s => s.Street == storage).First();
-                        good.Storages.Add(new GoodStorage() { Good = good, Storage = tempStorage });
+                        Name = model.Name,
+                        Specification = model.Specification,
+                        PhotoUrl = model.PhotoUrl,
+                        YearOfManufacture = model.YearOfManufacture,
+                        WarrantyTerm = model.WarrantyTerm,
+                        Producer = unitOfWork.Producers.GetAll().First(p => p.Name == Request.Form["producerSelect"]),
+                        Price = model.Price,
+                        Category = unitOfWork.Categories.GetAll().First(p => p.Name == Request.Form["categorySelect"]),
+                        Count = model.Count,
+                    };
+
+                    if (storages.Count > 0)
+                    {
+                        foreach (var storage in storages)
+                        {
+                            Storage tempStorage = unitOfWork.Storages.GetAll().First(s => s.Street == storage);
+                            good.Storages.Add(new GoodStorage() { Good = good, Storage = tempStorage });
+                        }
                     }
+
+                    await unitOfWork.Goods.Create(good);
                 }
 
-                await unitOfWork.Goods.Create(good);
                 await unitOfWork.SaveAsync();
                 HttpContext.Session.Set("goods", unitOfWork.Goods.GetAll().ToList());
 
@@ -247,13 +252,8 @@ namespace TechStore.Controllers
 
         private bool AddToResult(FindGoodView model, Good good)
         {
-            bool addToResult = true;
-
-            if (model.Name == null && model.ProducerName == null &&
-            model.EndPrice - model.StartPrice == 0 && model.YearOfManufacture == 0 && model.Type == null)
-            {
-                addToResult = false;
-            }
+            bool addToResult = !(model.Name == null && model.Producer.Name == null &&
+                                 model.EndPrice - model.StartPrice == 0 && model.YearOfManufacture == 0 && model.Category == null);
 
             if (model.Name != null && good.Name != model.Name)
             {
@@ -265,7 +265,7 @@ namespace TechStore.Controllers
                 addToResult = false;
             }
 
-            if (model.ProducerName != null && good.Producer.Name != model.ProducerName)
+            if (model.Producer.Name != null && good.Producer.Name != model.Producer.Name)
             {
                 addToResult = false;
             }

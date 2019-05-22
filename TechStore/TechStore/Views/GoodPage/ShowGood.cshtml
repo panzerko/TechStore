@@ -30,12 +30,12 @@
                         <b>Warranty term (months): </b>@Model.WarrantyTerm
                     </p>
                 }
-                @*@if (Model.Type != null)
+                @if (Model.Category.Name != null)
                 {
                     <p>
-                        <b>Type:</b> @Model.Type
+                        <b>Type:</b> @Model.Category.Name
                     </p>
-                }*@
+                }
                 @if (Model.Producer != null)
                 {
                     <p>

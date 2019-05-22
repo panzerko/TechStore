@@ -5,49 +5,47 @@
 
 
 <div class="input-group row mt-2">
-    <div class=" col">
-        <h2 class="">Founded @Model.Count() records : </h2>
-    </div>
-    <div class="col ml-auto">
+   
+    <div class="col">
         <form asp-controller="Category" asp-action="Index" method="get">
-            <button type="submit" class="btn btn-sm btn-primary">Back to Goods</button>
+            <button type="submit" class="btn btn-sm btn-dark">Back to Categories</button>
         </form>
+    </div>
+    <div class="col">
+        <h3 class="text-md-right">Founded records : @Model.Count()</h3>
     </div>
 </div>
 
-<table class="table table-responsive-md table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th>First Name</th>
-            <th>Title</th>
-            <th>Products</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-    @foreach (var category in Model)
-    {
-        <tr>
-            <td>@category.Name</td>
-            <td>@category.Title</td>
+@foreach (var category in Model)
+{
+    <div class="card cart-goods my-2">
+        <div class="row card-body cart-item">
+            <div class="col-md-3 col-12 text-center">
+                <div class="cart-good-img mx-auto align-items-center"><img class="d-block mx-auto my-auto block-product-img" src="~/images/categories/@category.ImageURL" /></div>
+            </div>
+            <div class="col-12 col-md-5">
+                <p><b>Name : </b>@category.Name</p>
+                <p><b>Title : </b>@category.Title</p>
+            </div>
+            <div class="col col-md-2">
+                <p><b>Goods : </b><a asp-action="ShowGoods" asp-route-id="@category.Id">Show Products</a></p>
+            </div>
 
-            <td><a asp-action="ShowGoods" asp-route-id="@category.Id">Show Products</a></td>
-            <td>
+            <div class="col-12 col-md-1">
                 <form asp-action="Edit" asp-route-id="@category.Id" method="get">
-                    <button type="submit" class="btn btn-sm btn-primary">
+                    <button type="submit" class="btn btn-sm btn-dark">
                         Edit
                     </button>
                 </form>
-            </td>
-            <td>
+            </div>
+            <div class="col-12 col-md-1">
                 <form asp-action="Delete" asp-route-id="@category.Id" method="post">
                     <button type="submit" class="btn btn-sm btn-danger">
                         Delete
                     </button>
                 </form>
-            </td>
-        </tr>
-    }
-    </tbody>
-</table>
+
+            </div>
+        </div>
+    </div>
+}

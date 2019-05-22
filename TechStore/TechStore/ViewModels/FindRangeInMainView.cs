@@ -10,11 +10,12 @@ namespace TechStore.ViewModels
     {
         public FindRangeInMainView()
         {
-            this.Types = new List<string>
-            {
-                "All"
-            };
-
+            var category = new Category { Name = "All" };
+            Categories = new List<Category> {category};
+            var producer = new Producer { Name = "All" };
+            Producers = new List<Producer> {producer};
+            ChoosenType = category;
+            ChoosenProducer = producer;
             AllSort = new Dictionary<string, string>
             {
                 { SortBy.PriceFromLower.ToString(), "Lowest price" },
@@ -25,20 +26,23 @@ namespace TechStore.ViewModels
 
         public FindRangeInMainView(UnitOfWork unitOfWork) : this()
         {
-            //var allTypes = unitOfWork.Goods.GetAll()
-            //    .Select(p => p.Type)
-            //    .Distinct();
-            var allTypes = unitOfWork.Goods.GetAll().Select(p=>p.Category.Name).ToList();
-            this.Types.AddRange(allTypes);
+            var allTypes = unitOfWork.Categories.GetAll().ToList();
+            var allProducers = unitOfWork.Producers.GetAll().ToList();
+            Categories.AddRange(allTypes);
+            Producers.AddRange(allProducers);
         }
 
         public FindGoodView GoodView { get; set; }
 
         public IEnumerable<Good> Goods { get; set; }
 
-        public List<string> Types { get; set; }
+        public List<Category> Categories { get; set; }
 
-        public string ChoosenType { get; set; }
+        public List<Producer> Producers { get; set; }
+
+        public Category ChoosenType { get; set; }
+
+        public Producer ChoosenProducer { get; set; }
 
         public SortBy SortBy { get; set; }
 

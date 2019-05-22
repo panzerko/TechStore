@@ -10,6 +10,7 @@ namespace TechStore.ViewModels
         {
             Storages = new List<Storage>();
             Producers = new List<Producer>();
+            Categories = new List<Category>();
         }
 
         [Required]
@@ -43,10 +44,6 @@ namespace TechStore.ViewModels
         [Required]
         [Display(Name = "Price")]
         public decimal Price { get; set; }
-
-        [Required]
-        [Display(Name = "Product type")]
-        public string Type { get; set; }
 
         [Required]
         [Display(Name = "Amount")]

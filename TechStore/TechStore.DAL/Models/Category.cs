@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace TechStore.DAL.Models
 {
@@ -19,6 +21,8 @@ namespace TechStore.DAL.Models
 
         public string ImageURL { get; set; }
 
+        [JsonIgnore]
+        [IgnoreDataMember]
         public ICollection<Good> Goods { get; set; }
     }
 }

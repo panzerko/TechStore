@@ -3,38 +3,53 @@
     ViewBag.Title = "Find producer";
 }
 
-<form asp-action="Find" asp-controller="Producer">
-    <div class="row py-2 justify-content-center">
-        <div class="form-group col-lg-7">
-            <div class="form-group row">
-                <div class="col">
-                    <label asp-for="Name" class="control-label">Name</label>
-                    <input type="text" asp-for="Name" class="form-control" />
+<div class="row justify-content-center">
+    <div class="col col-lg-7 my-2">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col text-center">
+                        <h2 class="">Find Producer</h2>
+                    </div>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col">
-                    <label asp-for="Phone" class="control-label">Phone</label>
-                    <input type="text" asp-for="Phone" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col">
-                    <label asp-for="Email" class="control-label">Email</label>
-                    <input type="text" asp-for="Email" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col">
-                    <label asp-for="WebSite" class="control-label">WebSite</label>
-                    <input type="text" asp-for="WebSite" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col">
-                    <button type="submit" value="Find" class="btn btn-primary" >Find</button> 
-                </div>
+            <div class="card-body">
+                <form asp-action="Find" asp-controller="Producer">
+                    <div class="row py-2 justify-content-center">
+                        <div class="form-group col">
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label asp-for="Name" class="control-label">Name</label>
+                                    <input type="text" asp-for="Name" placeholder="Name" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label asp-for="Phone" class="control-label">Phone</label>
+                                    <input type="text" asp-for="Phone" placeholder="Phone" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label asp-for="Email" class="control-label">Email</label>
+                                    <input type="text" asp-for="Email" placeholder="Email" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label asp-for="WebSite" class="control-label">WebSite</label>
+                                    <input type="text" asp-for="WebSite" placeholder="Website" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col text-center">
+                                    <button type="submit" value="Find"  class="btn btn-dark">Find</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</form>
+</div>

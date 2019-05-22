@@ -19,4 +19,9 @@
     <ProjectReference Include="..\TechStore.DAL\TechStore.DAL.csproj" />
   </ItemGroup>
 
+
+  <ItemGroup>
+    <Folder Include="wwwroot\images\categories\" />
+  </ItemGroup>
+
 </Project>

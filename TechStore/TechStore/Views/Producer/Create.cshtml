@@ -3,40 +3,55 @@
     ViewBag.Title = "New producer";
 }
 
-<form asp-action="Create" asp-controller="Producer">
-    <div asp-validation-summary="All" class="text-danger"></div>
-    <div class="row py-2 justify-content-center">
-        <div class="form-group col-lg-7">
-            <div class="form-group row">
-                <div class="col">
-                    <label asp-for="Name" class="control-label">Name</label>
-                    <input type="text" asp-for="Name" class="form-control" placeholder="Name"/>
+<div class="row justify-content-center">
+    <div class="col col-lg-7 my-2">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col text-center">
+                        <h2 class="">Create Producer</h2>
+                    </div>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col">
-                    <label asp-for="Phone" class="control-label">Phone</label>
-                    <input type="text" asp-for="Phone" class="form-control" placeholder="Phone"/>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col">
-                    <label asp-for="Email" class="control-label">Email</label>
-                    <input type="email" asp-for="Email" class="form-control" placeholder="Email"/>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col">
-                    <label asp-for="WebSite" class="control-label">WebSite</label>
-                    <input type="text" asp-for="WebSite" class="form-control" placeholder="Web site"/>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col">
-                    <button type="submit" value="Add" class="btn btn-success">Add</button>
-                </div>
+            <div class="card-body">
+                <form asp-action="Create" asp-controller="Producer">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="row py-2 justify-content-center">
+                        <div class="form-group col">
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label asp-for="Name" class="control-label">Name</label>
+                                    <input type="text" asp-for="Name" class="form-control" placeholder="Name" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label asp-for="Phone" class="control-label">Phone</label>
+                                    <input type="text" asp-for="Phone" class="form-control" placeholder="Phone" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label asp-for="Email" class="control-label">Email</label>
+                                    <input type="email" asp-for="Email" class="form-control" placeholder="Email" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col">
+                                    <label asp-for="WebSite" class="control-label">WebSite</label>
+                                    <input type="text" asp-for="WebSite" class="form-control" placeholder="Web site" />
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col text-center">
+                                    <button type="submit" value="Add" class="btn btn-dark">Add</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
             </div>
         </div>
-
     </div>
-</form>
+</div>

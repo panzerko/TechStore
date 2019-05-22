@@ -3,47 +3,59 @@
     ViewBag.Title = "Order history";
 }
 
+<div class="container">
+@foreach (var order in Model)
+{
 
-<table class="table table-hover" style="margin-top: 4%;">
-    <tr>
-        <th>Number of order</th>
-        <th>Date of order</th>
-        <th>Goods</th>
-        <th>City</th>
-        <th>Street</th>
-        <th>Status</th>
-        <th>Price</th>
-        <th></th>
-        <th></th>
-    </tr>
-    @foreach (var order in Model)
-    {
-    <tr>
-        <td>@order.Id</td>
-        <td>@order.OrderDate</td>
-        <td><a asp-action="ShowGoods" asp-route-id="@order.Id">Goods</a></td>
-        <td>@order.EndPointCity</td>
-        <td>@order.EndPointStreet</td>
-        <td>@order.OrderStatus</td>
-        <td>@order.CommonPrice</td>
-        <td>
-            <form asp-controller="User" asp-action="CancelOrder" asp-route-id="@order.Id">
-                @if (order.OrderStatus == TechStore.DAL.Classes.OrderStatus.Processing ||
-                 order.OrderStatus == TechStore.DAL.Classes.OrderStatus.Ordered)
-                {
-                    <input value="Cancel" class="btn btn-primary" type="submit" />
-                }
-            </form>
-        </td>
-        <td>
-            <form asp-controller="User" asp-action="DeleteOrder" asp-route-id="@order.Id">
-                @if (order.OrderStatus == TechStore.DAL.Classes.OrderStatus.Ordered)
-                {
-                    <input value="Delete" class="btn btn-danger" type="submit" />
-                }
-            </form>
-        </td>
-    </tr>
-    }
-</table>
+    <div class="row my-2">
+        <div class="col">
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-md-1">
+                        <b>#</b>
+                        <p>@order.Id</p>
+                    </div>
+                    <div class="col-md-2">
+                        <b>Date</b>
+                        <p>@order.OrderDate</p>
+                    </div>
+                    <div class="col-md-2">
+                        <b>Goods</b>
+                        <p><a asp-action="ShowGoods" asp-route-id="@order.Id">Show Goods</a></p>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Location</b>
+                        <p>@order.EndPointCity @order.EndPointStreet</p>
+                    </div>
+                    <div class="col-md-1">
+                        <b>Status</b>
+                        <p>@order.OrderStatus</p>
+                    </div>
+                    <div class="col-md-1">
+                        <b>Price</b>
+                        <p>@order.CommonPrice</p>
+                    </div>
+                    <div class="col-md-1">
+                        <form asp-controller="User" asp-action="CancelOrder" asp-route-id="@order.Id">
+                            @if (order.OrderStatus == TechStore.DAL.Classes.OrderStatus.Processing ||
+                                 order.OrderStatus == TechStore.DAL.Classes.OrderStatus.Ordered)
+                            {
+                                <input value="Cancel" class="btn btn-dark" type="submit" />
+                            }
+                        </form>
+                    </div>
+                    <div class="col-md-1">
+                        <form asp-controller="User" asp-action="DeleteOrder" asp-route-id="@order.Id">
+                            @if (order.OrderStatus == TechStore.DAL.Classes.OrderStatus.Ordered)
+                            {
+                                <input value="Delete" class="btn btn-danger" type="submit" />
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+</div>
 

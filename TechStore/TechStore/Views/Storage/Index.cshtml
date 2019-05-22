@@ -4,43 +4,43 @@
 }
 <div class="row py-3">
     <div class="col">
-        <a class="btn btn-sm btn-primary" asp-action="Create">Add new storage</a>
-        <a class="btn btn-sm btn-primary" asp-action="Find">Find storage</a>
+        <a class="btn btn-sm btn-dark" asp-action="Create">Add new storage</a>
+        <a class="btn btn-sm btn-dark" asp-action="Find">Find storage</a>
     </div>
 </div>
+@foreach (var producer in Model)
+{
+    <div class="card my-2">
+        <div class="row card-body">
+            <div class="col col-md-1">
+                <p><b>Id : </b>@producer.Id</p>
+            </div>
+            <div class="col col-md-5">
+                <p><b>City : </b>@producer.City</p>
+                <p><b>Street : </b>@producer.Street</p>
+            </div>
 
-<table class="table table-responsive-md table-hover">
-    <thead class="thead-dark">
-        <tr>
-            <th>City</th>
-            <th>Street</th>
-            <th>Goods</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var storage in Model)
-        {
-            <tr>
-                <td>@storage.City</td>
-                <td>@storage.Street</td>
-                <td><a asp-action="ShowGoods" asp-route-id="@storage.Id">Show Goods</a></td>
-                <td>
-                    <form asp-action="Edit" asp-route-id="@storage.Id" method="get">
-                        <button type="submit" class="btn btn-sm btn-primary">
-                            Edit
-                        </button>
-                    </form>
-                </td>
-                <td>
-                    <form asp-action="Delete" asp-route-id="@storage.Id" method="post">
-                        <button type="submit" class="btn btn-sm btn-danger">
-                            Delete
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+            <div class="col col-md-4">
+                <p><b>Goods : </b></p>
+                <p><a asp-action="ShowGoods" asp-route-id="@producer.Id">Show Goods</a></p>
+
+            </div>
+            <div class="col col-md-1">
+                <form asp-action="Edit" asp-controller="Storage" asp-route-id="@producer.Id" method="get">
+                    <button type="submit" class="btn btn-sm btn-dark">
+                        Edit
+                    </button>
+                </form>
+            </div>
+            <div class="col col-md-1">
+                <form asp-action="Delete" asp-controller="Storage" asp-route-id="@producer.Id" method="post">
+                    <button type="submit" class="btn btn-sm btn-danger">
+                        Delete
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+}
+

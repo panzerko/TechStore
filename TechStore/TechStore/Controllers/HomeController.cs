@@ -25,6 +25,12 @@ namespace TechStore.Controllers
             return View();
         }
 
+        public IActionResult Categories()
+        {
+            var categories = unitOfWork.Categories.GetAll().ToList();
+            return View(categories);
+        }
+
         public IActionResult Index(int page = 1)
         {
             var filterModel = HttpContext.Session.Get<FindRangeInMainView>("filter");
@@ -35,7 +41,7 @@ namespace TechStore.Controllers
             }
             else
             {
-                filterModel.Types = filterModel.Types.Distinct().ToList();
+                filterModel.Categories = filterModel.Categories.Distinct().ToList();
             }
 
             var goods = HttpContext.Session.Get<List<Good>>("goods");
@@ -66,10 +72,14 @@ namespace TechStore.Controllers
             var tempModel = new FindRangeInMainView(unitOfWork);
             var allGoods = unitOfWork.Goods.GetAll().ToList();
 
-            model.FilterModel.GoodView.Type = tempModel.Types
-                .Where(t => t == Request.Form["typeSelect"]).First();
-            tempModel.ChoosenType = model.FilterModel.GoodView.Type;
-            model.FilterModel.Types = tempModel.Types;
+            model.FilterModel.GoodView.Category = tempModel.Categories.First(t => t.Name == Request.Form["typeSelect"]);
+            model.FilterModel.GoodView.Producer = tempModel.Producers.First(t => t.Name == Request.Form["producerSelect"]);
+
+            tempModel.ChoosenType = model.FilterModel.GoodView.Category;
+            tempModel.ChoosenProducer = model.FilterModel.GoodView.Producer;
+
+            model.FilterModel.Categories = tempModel.Categories;
+            model.FilterModel.Producers = tempModel.Producers;
 
             foreach (var good in allGoods)
             {
@@ -85,14 +95,18 @@ namespace TechStore.Controllers
             return RedirectToAction("Index", new { page = 1 });
         }
 
-        public IActionResult TypeSearch(string goodType)
+        public IActionResult TypeSearch(int goodType, string categoryName)
         {
             var model = new FindRangeInMainView(unitOfWork);
-            //var goods = unitOfWork.Goods.GetAll().ToList().Where(p => p.Type == goodType);
-            var goods = unitOfWork.Goods.GetAll().ToList();
-            if (goodType == "All")
+            List<Good> goods;
+            if (categoryName == "All")
             {
                 goods = unitOfWork.Goods.GetAll().ToList();
+            }
+            else
+            {
+                goods = unitOfWork.Goods.GetAll().Where(p => p.CategoryId == goodType).ToList();
+
             }
 
             HttpContext.Session.Set("filter", model);
@@ -168,11 +182,14 @@ namespace TechStore.Controllers
                 addToResult = false;
             }
 
-            if (model.FilterModel.GoodView.ProducerName != null
-                && good.Producer.Name != model.FilterModel.GoodView.ProducerName)
+            if (model.FilterModel.GoodView.Producer != null && good.Producer.Name != model.FilterModel.GoodView.Producer.Name)
             {
-                addToResult = false;
+                if (model.FilterModel.GoodView.Producer.Name != "All")
+                {
+                    addToResult = false;
+                }
             }
+
 
             if (model.FilterModel.GoodView.EndPrice - model.FilterModel.GoodView.StartPrice != 0
                 && good.Price < model.FilterModel.GoodView.StartPrice ||
@@ -181,9 +198,9 @@ namespace TechStore.Controllers
                 addToResult = false;
             }
            // if (model.FilterModel.GoodView.Type != null && good.Type != model.FilterModel.GoodView.Type)
-                if (model.FilterModel.GoodView.Type != null)
+                if (model.FilterModel.GoodView.Category != null && good.Category.Name != model.FilterModel.GoodView.Category.Name)
             {
-                if (model.FilterModel.GoodView.Type != "All")
+                if (model.FilterModel.GoodView.Category.Name != "All")
                 {
                     addToResult = false;
                 }

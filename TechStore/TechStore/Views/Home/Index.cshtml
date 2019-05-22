@@ -10,16 +10,16 @@
         <div class="col-lg-2 p-lg-0">
             <div class="card ">
                 <div class="list-group" id="list-tab" role="tablist">
-                    <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="TypeSearch" asp-route-goodType="All">ALL</a>
+                    <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="TypeSearch" asp-route-categoryName="All">ALL</a>
 
-                    @foreach (var type in Model.FilterModel.Types)
+                    @foreach (var type in Model.FilterModel.Categories)
                     {
-                        @if (type == "All")
+                        @if (type.Name == "All")
                          {
                              continue;
                          }
 
-                        <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="TypeSearch" asp-route-goodType="@type">@type</a>
+                        <a class="list-group-item list-group-item-action" asp-area="" asp-controller="Home" asp-action="TypeSearch" asp-route-goodType="@type.Id" asp-route-categoryName="@type.Name">@type.Name</a>
                     }
                 </div>
             </div>
@@ -39,21 +39,34 @@
                                     <input type="text" asp-for="FilterModel.GoodView.Name" class="form-control" />
                                 </div>
                                 <div class="form-group col-lg-4">
-                                    <label asp-for="FilterModel.GoodView.ProducerName" class="control-label">Producer name</label>
-                                    <input type="text" asp-for="FilterModel.GoodView.ProducerName" class="form-control" />
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <label asp-for="FilterModel.Types">Type</label>
-                                    <select class="form-control" name="typeSelect">
-                                        @foreach (var type in Model.FilterModel.Types)
+                                    <label asp-for="FilterModel.Producers">Producer</label>
+                                    <select class="form-control" name="producerSelect">
+                                        @foreach (var type in Model.FilterModel.Producers)
                                         {
-                                            @if (type == Model.FilterModel.ChoosenType)
+                                            @if (type.Id == Model.FilterModel.ChoosenProducer.Id)
                                              {
-                                                 <option selected>@type</option>
+                                                 <option selected>@type.Name</option>
                                              }
                                              else
                                              {
-                                                 <option>@type</option>
+                                                 <option>@type.Name</option>
+                                             }
+                                        }
+                                    </select>
+                                   
+                                </div>
+                                <div class="form-group col-lg-4">
+                                    <label asp-for="FilterModel.Categories">Type</label>
+                                    <select class="form-control" name="typeSelect">
+                                        @foreach (var type in Model.FilterModel.Categories)
+                                        {
+                                            @if (type.Id == Model.FilterModel.ChoosenType.Id)
+                                             {
+                                                 <option selected>@type.Name</option>
+                                             }
+                                             else
+                                             {
+                                                 <option>@type.Name</option>
                                              }
                                         }
                                     </select>

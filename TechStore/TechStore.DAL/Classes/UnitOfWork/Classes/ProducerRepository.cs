@@ -35,7 +35,10 @@ namespace TechStore.DAL.Classes.UnitOfWork.Classes
         {
             Producer producer = await _appContext.Producers.FindAsync(id);
             producer.Products = _appContext.Goods.Where(g => g.ProducerId == producer.Id).ToList();
-
+            foreach (var good in producer.Products)
+            {
+                good.Category = _appContext.Categories.First(p => p.Id == good.CategoryId);
+            }
             return producer;
         }
 
