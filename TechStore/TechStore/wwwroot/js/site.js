@@ -172,7 +172,7 @@ function setMarker(commonPrice) {
 
 function setDeliveryPrice(commonPrice) {
     var storages = document.getElementById('avaliableStorages');
-    var additonalPrice = 120;
+    var additonalPrice = 35;
 
     if (storages.length == 0) {
         document.getElementById('deliveryPrice').textContent = additonalPrice;
@@ -189,10 +189,10 @@ function setDeliveryPrice(commonPrice) {
 
     for (var i = 0; i < storages.length; i++) {
         if (storages[i].value == city) {
-            document.getElementById('deliveryPrice').textContent = 15;
+            document.getElementById('deliveryPrice').textContent = 10;
             document.getElementById('commonPrice').textContent = commonPrice;
             var price = Number(document.getElementById('goodPrice').textContent);
-            document.getElementById('commonPrice').value = (price + 15).toString();
+            document.getElementById('commonPrice').value = (price + 10).toString();
             isTheSamePlace = true;
         }
     }

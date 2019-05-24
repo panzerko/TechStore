@@ -52,9 +52,11 @@ namespace TechStore.DAL.Classes.UnitOfWork.Classes
         {
             IEnumerable<Good> goods = _appContext.Goods
                 .Include(p => p.Category)
-                .Include(p => p.Reviews)
                 .Include(p => p.Producer);
-
+            foreach (var good in goods)
+            {
+                good.Reviews = GetReviews(good.Id);
+            }
             return goods;
         }
 

@@ -2,33 +2,48 @@
 @{
     ViewBag.Title = "Change order status";
 }
+<div class="row justify-content-center">
+    <div class="col col-lg-7 my-2">
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col text-center">
+                        <h2 class="">Change Status</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
 
-<form asp-action="ChangeStatus" asp-controller="Manager">
-    <div class="form-group" style="margin-top: 2%;">
-        <label asp-for="Id" class="control-label">Number of order</label>
-        <input type="number" asp-for="Id" class="form-control" readonly />
+                <form asp-action="ChangeStatus" asp-controller="Manager">
+                    <div class="form-group" style="margin-top: 2%;">
+                        <label asp-for="Id" class="control-label">Number of order</label>
+                        <input type="number" asp-for="Id" class="form-control" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="OrderStatuses">Status</label>
+                        <select class="form-control" name="orderStatus">
+                            @foreach (var status in Model.OrderStatuses)
+                            {
+                                if (status == Model.CurrentStatus)
+                                {
+                                    <option selected>@status.ToString()</option>
+                                }
+                                else
+                                {
+                                    <option>@status.ToString()</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group" hidden="hidden">
+                        <input type="checkbox" name="SendEmail" asp-for="SendEmail" />
+                        <label asp-for="SendEmail" class="control-label">Send email</label>
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" value="Change" class="btn btn-dark" />
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="OrderStatuses">Status</label>
-        <select class="form-control" name="orderStatus">
-            @foreach (var status in Model.OrderStatuses)
-            {
-                if (status == Model.CurrentStatus)
-                {
-                    <option selected>@status.ToString()</option>
-                }
-                else
-                {
-                    <option>@status.ToString()</option>
-                }
-            }
-        </select>
-    </div>
-    <div class="form-group">
-        <input type="checkbox" name="SendEmail" asp-for="SendEmail" />
-        <label asp-for="SendEmail" class="control-label">Send email</label>
-    </div>
-    <div class="form-group">
-        <input type="submit" value="Change" class="btn btn-primary" style="margin: 2% 35%; width: 30%;" />
-    </div>
-</form>
+</div>

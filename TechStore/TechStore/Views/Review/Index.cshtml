@@ -3,40 +3,36 @@
     ViewBag.Title = "Review list";
 }
 
-<table class="table table-responsive-md table-hover">
-    <thead class="thead-dark">
-    <tr>
-        <th>Id</th>
-        <th>User name</th>
-        <th>Good name</th>
-        <th>Date</th>
-        <th>Message</th>
-        <th>Mark</th>
-        <th></th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var review in Model)
-    {
-        <tr>
-            <td>@review.Id</td>
-            <td>@string.Join(" ", review.Customer.FirstName, review.Customer.SecondName)</td>
-            <td><a asp-action="ShowGood" asp-controller="GoodPage" asp-route-goodId="@review.Good.Id">@review.Good.Name</a></td>
-            <td>@review.Date</td>
-            <td>@review.Message</td>
-            <td>@review.StarCount / 5</td>
-            <td>
+@foreach (var review in Model)
+{
+    <div class="card my-2">
+        <div class="row card-body">
+            <div class="col col-md-1">
+                <p><b>Id : </b>@review.Id</p>
+            </div>
+            <div class="col col-md-4">
+                <p><b>User Name : </b>@string.Join(" ", review.Customer.FirstName, review.Customer.SecondName)</p>
+                <p><b>Good Name : </b><a asp-action="ShowGood" asp-controller="GoodPage" asp-route-goodId="@review.Good.Id">@review.Good.Name</a></p>
+            </div>
+            <div class="col col-md-5">
+                <p><b>Date : </b>@review.Date</p>
+                <p><b>Mark : </b>@review.StarCount</p>
+                <p><b>Message : </b>@review.Message</p>
+            </div>
+
+
+            <div class="col col-md-1">
                 <form asp-action="Confirm" asp-route-id="@review.Id" method="post">
-                    <input type="submit" class="btn btn-sm btn-success" value="Confirm">
+                    <input type="submit" class="btn btn-sm btn-dark" value="Confirm">
                 </form>
-            </td>
-            <td>
+            </div>
+            <div class="col col-md-1">
                 <form asp-action="Delete" asp-route-id="@review.Id" method="post">
                     <input type="submit" class="btn btn-sm btn-danger" value="Delete">
                 </form>
-            </td>
-        </tr>
-    }
-</table>
+            </div>
+        </div>
+    </div>
+}
+
 

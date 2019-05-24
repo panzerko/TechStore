@@ -3,36 +3,45 @@
     ViewBag.Title = "Manager panel";
 }
 
-<a class="btn btn-sm btn-primary" style="margin: 2% 0%;" asp-action="Find">Find order</a>
+<a class="btn btn-sm btn-dark my-2" asp-action="Find">Find order</a>
 
-<table class="table table-hover">
-    <tr>
-        <th>Number of order</th>
-        <th>Date of order</th>
-        <th>Goods</th>
-        <th>Customer</th>
-        <th>City</th>
-        <th>Street</th>
-        <th>Status</th>
-        <th>Price</th>
-        <th></th>
-    </tr>
-    @foreach (var order in Model)
-    {
-        <tr>
-            <td>@order.Id</td>
-            <td>@order.OrderDate</td>
-            <td><a asp-action="ShowCustomer" asp-route-id="@order.Id">Customer</a></td>
-            <td><a asp-action="ShowGoods" asp-route-id="@order.Id">Goods</a></td>
-            <td>@order.EndPointCity</td>
-            <td>@order.EndPointStreet</td>
-            <td>@order.OrderStatus</td>
-            <td>@order.CommonPrice</td>
-            <td>
-                <a class="btn btn-sm btn-primary" asp-action="Edit" asp-route-id="@order.Id">Edit</a>
-                <a class="btn btn-sm btn-warning" asp-action="ChangeStatus" asp-route-id="@order.Id">Change status</a>
-            </td>
-        </tr>
-    }
-</table>
+@foreach (var order in Model)
+{
 
+    <div class="row my-2">
+        <div class="col">
+            <div class="card card-body">
+                <div class="row">
+                    <div class="col-md-1">
+                        <b>#</b>
+                        <p>@order.Id</p>
+                    </div>
+                    <div class="col-md-2">
+                        <b>Date</b>
+                        <p>@order.OrderDate</p>
+                    </div>
+                    <div class="col-md-2">
+                        <p><a asp-action="ShowCustomer" asp-route-id="@order.Id">Customer</a></p>
+                        <p><a asp-action="ShowGoods" asp-route-id="@order.Id">Show Goods</a></p>
+                    </div>
+                    <div class="col-md-3">
+                        <b>Location</b>
+                        <p>@order.EndPointCity @order.EndPointStreet</p>
+                    </div>
+                    <div class="col-md-1">
+                        <b>Status</b>
+                        <p>@order.OrderStatus</p>
+                    </div>
+                    <div class="col-md-1">
+                        <b>Price</b>
+                        <p>@order.CommonPrice</p>
+                    </div>
+                    <div class="col-md-2">
+                        <a class="btn btn-sm btn-dark" asp-action="Edit" asp-route-id="@order.Id">Edit</a>
+                        <a class="btn btn-sm btn-light" asp-action="ChangeStatus" asp-route-id="@order.Id">Change status</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
